@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh-TW"><head><!-- PWA Meta — auto-injected by PWA 打包神器 -->
+<html lang="zh-TW">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎨 Icon 產生器</title>
@@ -59,14 +60,7 @@ button:disabled{opacity:0.35;cursor:default}
 
 #dl-row{display:flex;gap:8px;width:100%;max-width:320px;margin-bottom:10px}
 </style>
-<meta name="application-name" content="icon-ai"><meta name="description" content=""><meta name="theme-color" content="#1a73e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="icon-ai"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon.svg"><script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('sw.js')
-        .then(r => console.log('[SW] registered:', r.scope))
-        .catch(e => console.warn('[SW] registration failed:', e));
-    });
-  }</script></head>
+</head>
 <body>
 
 <h1>🎨 Icon 產生器</h1>
@@ -223,8 +217,8 @@ Output ONLY the <svg viewBox="0 0 512 512">...</svg> element.`
     if(!data.content||!data.content[0])throw new Error('回應格式錯誤');
 
     const text=data.content.map(b=>b.text||'').join('');
-    const match=text.match(/<svg[\s\S]*?<\/svg>/i);
-    if(!match)throw new Error('找不到 SVG，回應：'+text.slice(0,80));
+    const match=text.match(/<svg[\s\S]*<\/svg>/i);
+    if(!match)throw new Error('找不到 SVG，回應：'+text.slice(0,60));
 
     currentSVG=match[0];
     showPreviewSVG(currentSVG);
@@ -270,6 +264,5 @@ document.addEventListener('DOMContentLoaded',()=>{
   $('dl-512').addEventListener('pointerup',()=>dlPNG(512,'icon-512.png'));
 });
 </script>
-
-
-</body></html>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- 天空漸層：魔幻晨光 -->
+    <radialGradient id="sky" cx="50%" cy="35%" r="75%">
+      <stop offset="0%" stop-color="#ffe8f0"/>
+      <stop offset="30%" stop-color="#ffb3d1"/>
+      <stop offset="60%" stop-color="#c084c8"/>
+      <stop offset="85%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#3b0764"/>
+    </radialGradient>
+
+    <!-- 太陽光暈 -->
+    <radialGradient id="sunhalo" cx="50%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#fff7a0" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#ffd580" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ff88aa" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 地面漸層 -->
+    <linearGradient id="ground" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="40%" stop-color="#16a34a"/>
+      <stop offset="100%" stop-color="#052e16"/>
+    </linearGradient>
+
+    <!-- 花瓣漸層們 -->
+    <radialGradient id="petal1" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff0f5"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </radialGradient>
+    <radialGradient id="petal2" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fffbeb"/>
+      <stop offset="100%" stop-color="#fb923c"/>
+    </radialGradient>
+    <radialGradient id="petal3" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f0feff"/>
+      <stop offset="100%" stop-color="#22d3ee"/>
+    </radialGradient>
+    <radialGradient id="petal4" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fdf4ff"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </radialGradient>
+
+    <!-- 花心漸層 -->
+    <radialGradient id="center1" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fef08a"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </radialGradient>
+    <radialGradient id="center2" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fed7aa"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </radialGradient>
+
+    <!-- 魔法光暈濾鏡 -->
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="sparkle" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- 草地漸層 -->
+    <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+
+    <!-- 薄霧 -->
+    <linearGradient id="mist" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fce7f3" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#fce7f3" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 背景天空 -->
+  <rect width="512" height="512" fill="url(#sky)" rx="64"/>
+
+  <!-- 太陽光暈 -->
+  <ellipse cx="256" cy="148" rx="180" ry="140" fill="url(#sunhalo)" filter="url(#softglow)"/>
+
+  <!-- 太陽核心 -->
+  <circle cx="256" cy="148" r="38" fill="#fff7a0" filter="url(#glow)" opacity="0.9"/>
+  <circle cx="256" cy="148" r="26" fill="#ffffff" opacity="0.95"/>
+
+  <!-- 太陽光芒 -->
+  <g stroke="#fff3b0" stroke-width="2.5" opacity="0.7" filter="url(#sparkle)">
+    <line x1="256" y1="95" x2="256" y2="70"/>
+    <line x1="256" y1="201" x2="256" y2="226"/>
+    <line x1="203" y1="148" x2="178" y2="148"/>
+    <line x1="309" y1="148" x2="334" y2="148"/>
+    <line x1="218" y1="110" x2="200" y2="92"/>
+    <line x1="294" y1="186" x2="312" y2="204"/>
+    <line x1="294" y1="110" x2="312" y2="92"/>
+    <line x1="218" y1="186" x2="200" y2="204"/>
+  </g>
+
+  <!-- 遠山剪影 -->
+  <path d="M0,340 L70,270 L130,310 L190,240 L250,285 L310,235 L370,275 L430,250 L512,290 L512,400 L0,400 Z"
+        fill="#6b21a8" opacity="0.45"/>
+  <path d="M0,370 L80,310 L150,345 L220,295 L290,330 L360,300 L430,325 L512,310 L512,420 L0,420 Z"
+        fill="#7e22ce" opacity="0.35"/>
+
+  <!-- 薄霧層 -->
+  <rect x="0" y="340" width="512" height="80" fill="url(#mist)"/>
+
+  <!-- 地面 -->
+  <ellipse cx="256" cy="490" rx="280" ry="55" fill="url(#ground)"/>
+  <rect x="0" y="460" width="512" height="52" fill="#052e16" rx="0"/>
+  <rect x="0" y="460" width="512" height="52" fill="url(#ground)"/>
+
+  <!-- 草叢背景 -->
+  <g fill="url(#grass)" opacity="0.8">
+    <path d="M20,462 Q30,430 35,462"/>
+    <path d="M45,460 Q52,425 58,460"/>
+    <path d="M70,465 Q78,435 85,465"/>
+    <path d="M420,460 Q428,428 435,460"/>
+    <path d="M450,465 Q458,432 465,465"/>
+    <path d="M475,462 Q483,430 490,462"/>
+    <path d="M100,462 Q106,438 112,462"/>
+    <path d="M390,463 Q396,438 402,463"/>
+  </g>
+
+  <!-- ===== 主花 中央大花（粉紅） ===== -->
+  <g transform="translate(256,330)">
+    <!-- 花莖 -->
+    <path d="M0,0 Q-8,40 -5,80" stroke="#16a34a" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- 葉子 -->
+    <path d="M-7,50 Q-35,35 -28,20 Q-15,38 -7,50Z" fill="#22c55e"/>
+    <!-- 花瓣 -->
+    <ellipse cx="0" cy="-28" rx="14" ry="26" fill="url(#petal1)" transform="rotate(0)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-28" rx="14" ry="26" fill="url(#petal1)" transform="rotate(45)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-28" rx="14" ry="26" fill="url(#petal1)" transform="rotate(90)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-28" rx="14" ry="26" fill="url(#petal1)" transform="rotate(135)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-28" rx="14" ry="26" fill="url(#petal1)" transform="rotate(180)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-28" rx="14" ry="26" fill="url(#petal1)" transform="rotate(225)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-28" rx="14" ry="26" fill="url(#petal1)" transform="rotate(270)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-28" rx="14" ry="26" fill="url(#petal1)" transform="rotate(315)" filter="url(#glow)"/>
+    <!-- 花心 -->
+    <circle cx="0" cy="0" r="18" fill="url(#center1)" filter="url(#sparkle)"/>
+    <circle cx="0" cy="0" r="10" fill="#fbbf24"/>
+    <circle cx="-3" cy="-3" r="4" fill="#fef9c3" opacity="0.8"/>
+  </g>
+
+  <!-- ===== 左花（橘色） ===== -->
+  <g transform="translate(148,360)">
+    <path d="M0,0 Q5,30 3,65" stroke="#16a34a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M4,38 Q28,25 24,12 Q12,30 4,38Z" fill="#22c55e"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="21" fill="url(#petal2)" transform="rotate(0)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="21" fill="url(#petal2)" transform="rotate(60)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="21" fill="url(#petal2)" transform="rotate(120)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="21" fill="url(#petal2)" transform="rotate(180)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="21" fill="url(#petal2)" transform="rotate(240)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-22" rx="11" ry="21" fill="url(#petal2)" transform="rotate(300)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="13" fill="url(#center2)" filter="url(#sparkle)"/>
+    <circle cx="0" cy="0" r="7" fill="#fed7aa"/>
+    <circle cx="-2" cy="-2" r="3" fill="#fff7ed" opacity="0.8"/>
+  </g>
+
+  <!-- ===== 右花（紫色） ===== -->
+  <g transform="translate(370,350)">
+    <path d="M0,0 Q-6,32 -3,68" stroke="#16a34a" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M-4,40 Q-30,28 -26,14 Q-13,32 -4,40Z" fill="#22c55e"/>
+    <ellipse cx="0" cy="-24" rx="12" ry="22" fill="url(#petal4)" transform="rotate(0)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-24" rx="12" ry="22" fill="url(#petal4)" transform="rotate(51.4)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-24" rx="12" ry="22" fill="url(#petal4)" transform="rotate(102.8)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-24" rx="12" ry="22" fill="url(#petal4)" transform="rotate(154.2)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-24" rx="12" ry="22" fill="url(#petal4)" transform="rotate(205.6)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-24" rx="12" ry="22" fill="url(#petal4)" transform="rotate(257)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-24" rx="12" ry="22" fill="url(#petal4)" transform="rotate(308.4)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="14" fill="url(#center1)" filter="url(#sparkle)"/>
+    <circle cx="0" cy="0" r="8" fill="#e9d5ff"/>
+    <circle cx="-2" cy="-2" r="3" fill="#fdf4ff" opacity="0.9"/>
+  </g>
+
+  <!-- ===== 小花（青藍，左遠） ===== -->
+  <g transform="translate(90,390)" opacity="0.85">
+    <path d="M0,0 Q3,20 2,42" stroke="#15803d" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal3)" transform="rotate(0)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal3)" transform="rotate(72)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal3)" transform="rotate(144)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal3)" transform="rotate(216)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal3)" transform="rotate(288)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="9" fill="#fef08a"/>
+    <circle cx="-1" cy="-1" r="3" fill="#fff" opacity="0.7"/>
+  </g>
+
+  <!-- ===== 小花（粉，右遠） ===== -->
+  <g transform="translate(430,385)" opacity="0.85">
+    <path d="M0,0 Q-2,22 -1,44" stroke="#15803d" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal1)" transform="rotate(0)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal1)" transform="rotate(72)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal1)" transform="rotate(144)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal1)" transform="rotate(216)" filter="url(#glow)"/>
+    <ellipse cx="0" cy="-15" rx="8" ry="14" fill="url(#petal1)" transform="rotate(288)" filter="url(#glow)"/>
+    <circle cx="0" cy="0" r="9" fill="#fde68a"/>
+    <circle cx="-1" cy="-1" r="3" fill="#fff" opacity="0.7"/>
+  </g>
+
+  <!-- 魔法粒子 / 光點 -->
+  <g filter="url(#sparkle)">
+    <!-- 大光點 -->
+    <circle cx="180" cy="200" r="3.5" fill="#fff" opacity="0.9"/>
+    <circle cx="340" cy="175" r="3" fill="#fde68a" opacity="0.85"/>
+    <circle cx="130" cy="260" r="2.5" fill="#f0abfc" opacity="0.8"/>
+    <circle cx="390" cy="240" r="2.8" fill="#a5f3fc" opacity="0.8"/>
+    <circle cx="210" cy="290" r="2" fill="#fff" opacity="0.7"/>
+    <circle cx="310" cy="275" r="2.2" fill="#fde68a" opacity="0.75"/>
+    <!-- 小十字星光 -->
+    <g stroke="#ffffff" stroke-width="1.2" opacity="0.85">
+      <line x1="165" y1="170" x2="165" y2="178"/><line x1="161" y1="174" x2="169" y2="174"/>
+      <line x1="355" y1="210" x2="355" y2="218"/><line x1="351" y1="214" x2="359" y2="214"/>
+      <line x1="290" y1="185" x2="290" y2="191"/><line x1="287" y1="188" x2="293" y2="188"/>
+    </g>
+    <!-- 浮動光塵 -->
+    <circle cx="230" cy="240" r="1.5" fill="#f0abfc" opacity="0.6"/>
+    <circle cx="275" cy="255" r="1.8" fill="#bfdbfe" opacity="0.55"/>
+    <circle cx="320" cy="230" r="1.5" fill="#fde68a" opacity="0.6"/>
+    <circle cx="190" cy="310" r="1.2" fill="#fff" opacity="0.5"/>
+    <circle cx="350" cy="305" r="1.4" fill="#fff" opacity="0.5"/>
+    <circle cx="148" cy="320" r="1.2" fill="#fde68a" opacity="0.55"/>
+    <circle cx="410" cy="300" r="1.3" fill="#f0abfc" opacity="0.5"/>
+  </g>
+
+  <!-- 蝴蝶（簡約） -->
+  <g transform="translate(200,270) rotate(-15)" opacity="0.88" filter="url(#sparkle)">
+    <path d="M0,0 Q-20,-18 -32,-8 Q-22,5 0,0Z" fill="#f9a8d4" opacity="0.85"/>
+    <path d="M0,0 Q20,-18 32,-8 Q22,5 0,0Z" fill="#f9a8d4" opacity="0.85"/>
+    <path d="M0,0 Q-14,12 -20,6 Q-12,0 0,0Z" fill="#fbcfe8" opacity="0.7"/>
+    <path d="M0,0 Q14,12 20,6 Q12,0 0,0Z" fill="#fbcfe8" opacity="0.7"/>
+    <ellipse cx="0" cy="0" rx="2" ry="5" fill="#831843"/>
+  </g>
+
+  <!-- 暗角收邊 -->
+  <radialGradient id="vignette" cx="50%" cy="55%" r="72%">
+    <stop offset="55%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="#1e0533" stop-opacity="0.65"/>
+  </radialGradient>
+  <rect width="512" height="512" fill="url(#vignette)" rx="64"/>
+</svg>

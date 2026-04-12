@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-TW"><head><!-- PWA Meta — auto-injected by PWA 打包神器 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎨 Icon 產生器</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:linear-gradient(180deg,#060614 0%,#0d0d2a 100%);
+  min-height:100vh;color:#e0e0ff;
+  font-family:system-ui,sans-serif;
+  display:flex;flex-direction:column;align-items:center;
+  padding:28px 16px 48px;
+}
+h1{font-size:1.4rem;font-weight:bold;margin-bottom:4px}
+.sub{font-size:0.82rem;color:#556;margin-bottom:22px}
+
+#preview{
+  width:260px;height:260px;border-radius:28px;
+  background:#0a0a22;border:2px solid #2a2a5a;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;margin-bottom:18px;
+}
+#preview svg{width:100%;height:100%}
+.hint{color:#334;font-size:0.82rem;text-align:center;padding:16px;line-height:1.6}
+
+#status{font-size:0.8rem;min-height:36px;text-align:center;margin-bottom:18px;max-width:320px;line-height:1.5}
+
+.field-group{width:100%;max-width:320px;margin-bottom:16px}
+label{font-size:0.78rem;color:#778;display:block;margin-bottom:6px}
+textarea{
+  width:100%;background:#111128;color:#ccd;
+  border:1px solid #2a2a5a;border-radius:10px;
+  padding:10px 12px;font-size:0.88rem;resize:none;outline:none;
+  height:68px;
+}
+
+/* 通用標籤樣式 */
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:6px}
+.tag{
+  padding:6px 11px;border-radius:20px;font-size:0.76rem;
+  cursor:pointer;border:1px solid #2a2a5a;
+  background:#111128;color:#99aacc;
+  transition:all 0.15s;user-select:none;-webkit-user-select:none;
+}
+.tag.active{background:#1e2a4a;border-color:#5577cc;color:#aaccff;font-weight:bold}
+.tag:active{opacity:0.7}
+
+/* 描述快選 — 單選，稍微不同顏色 */
+.desc-tag.active{background:#2a1e3a;border-color:#8855cc;color:#ccaaff;font-weight:bold}
+
+.tag-hint{font-size:0.7rem;color:#445;margin-top:2px;font-style:italic}
+
+.btn-row{display:flex;gap:8px;width:100%;max-width:320px;margin-bottom:10px}
+button{flex:1;border-radius:12px;padding:12px 8px;font-size:0.88rem;cursor:pointer;border:1px solid;transition:opacity 0.15s}
+button:disabled{opacity:0.35;cursor:default}
+.btn-main{background:#1a3a2a;color:#90ffc0;border-color:#2a6a4a;font-weight:bold}
+.btn-sec{background:#1e1e4a;color:#c0c8ff;border-color:#3a3a7a}
+
+#dl-row{display:flex;gap:8px;width:100%;max-width:320px;margin-bottom:10px}
+</style>
+<meta name="application-name" content="icon-ai"><meta name="description" content=""><meta name="theme-color" content="#1a73e8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="icon-ai"><link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon.svg"><script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js')
+        .then(r => console.log('[SW] registered:', r.scope))
+        .catch(e => console.warn('[SW] registration failed:', e));
+    });
+  }</script></head>
+<body>
+
+<h1>🎨 Icon 產生器</h1>
+<p class="sub">用 AI 生成精美 App Icon</p>
+
+<div id="preview"><div class="hint">選擇或輸入描述<br>點擊生成</div></div>
+<div id="status" style="color:#7af">準備好了，請輸入描述並生成</div>
+
+<!-- 描述快選 -->
+<div class="field-group">
+  <label>📝 常用描述（點選後可再修改）</label>
+  <div class="tags" id="desc-tags">
+    <span class="tag desc-tag" data-desc="晴朗夜空，滿天繁星，極光圍繞">🌌 極光夜空</span>
+    <span class="tag desc-tag" data-desc="清晨陽光升起，山谷野花遍地">🌸 晨光野花</span>
+    <span class="tag desc-tag" data-desc="深海珊瑚礁，五彩魚群游動">🐠 深海珊瑚</span>
+    <span class="tag desc-tag" data-desc="飄著雪的寧靜山中小屋，透著燈光">🏔 雪山小屋</span>
+    <span class="tag desc-tag" data-desc="古典中國風，水墨山水，竹林">🎋 水墨山水</span>
+    <span class="tag desc-tag" data-desc="宇宙星雲，行星，銀河系">🪐 宇宙星雲</span>
+    <span class="tag desc-tag" data-desc="火焰鳳凰，展翅高飛，金紅色">🔥 火焰鳳凰</span>
+    <span class="tag desc-tag" data-desc="賽博朋克城市夜景，霓虹燈">🏙 賽博城市</span>
+    <span class="tag desc-tag" data-desc="森林裡的神秘精靈，發光蘑菇">🍄 精靈森林</span>
+    <span class="tag desc-tag" data-desc="日式禪風庭園，枯山水，楓葉">🍁 禪風庭園</span>
+    <span class="tag desc-tag" data-desc="抽象幾何圖形，對稱，漸層色彩">🔷 幾何抽象</span>
+    <span class="tag desc-tag" data-desc="可愛貓咪，大眼睛，粉色背景">🐱 可愛貓咪</span>
+  </div>
+  <div class="tag-hint" id="desc-hint">點選快速填入，或直接在下方輸入</div>
+</div>
+
+<!-- 自訂描述 -->
+<div class="field-group">
+  <label>✏️ 自訂描述</label>
+  <textarea id="desc" placeholder="在此輸入或修改描述內容..."></textarea>
+</div>
+
+<!-- 風格標籤 -->
+<div class="field-group">
+  <label>🎨 風格（可多選）</label>
+  <div class="tags" id="style-tags">
+    <span class="tag style-tag active" data-style="rich gradient">🌈 漸層豐富</span>
+    <span class="tag style-tag" data-style="flat minimal">⬜ 極簡扁平</span>
+    <span class="tag style-tag active" data-style="atmospheric">🌫 大氣感</span>
+    <span class="tag style-tag" data-style="neon glow">💜 霓虹發光</span>
+    <span class="tag style-tag" data-style="watercolor">🎨 水彩風</span>
+    <span class="tag style-tag" data-style="geometric">🔷 幾何圖形</span>
+    <span class="tag style-tag" data-style="pixel art">👾 像素風</span>
+    <span class="tag style-tag" data-style="hand drawn">✏️ 手繪風</span>
+    <span class="tag style-tag active" data-style="magical">✨ 魔幻感</span>
+    <span class="tag style-tag" data-style="dark moody">🌑 暗色調</span>
+    <span class="tag style-tag" data-style="bright cheerful">☀️ 明亮活潑</span>
+    <span class="tag style-tag" data-style="vintage retro">🕰 復古</span>
+    <span class="tag style-tag active" data-style="app icon style">📱 App Icon</span>
+  </div>
+  <div class="tag-hint" id="style-hint"></div>
+</div>
+
+<!-- 按鈕 -->
+<div class="btn-row">
+  <button class="btn-main" id="gen-btn">✨ 生成 Icon</button>
+  <button class="btn-sec" id="retry-btn" style="display:none">🔄 重試</button>
+</div>
+
+<div id="dl-row" style="display:none">
+  <button class="btn-sec" id="dl-svg">⬇ SVG</button>
+  <button class="btn-sec" id="dl-192">⬇ PNG 192</button>
+  <button class="btn-sec" id="dl-512">⬇ PNG 512</button>
+</div>
+
+<canvas id="canvas" style="display:none"></canvas>
+
+<script>
+const WORKER_URL = 'https://arcar.kftseng2oo1.workers.dev/';
+let currentSVG = null;
+
+function $(id){ return document.getElementById(id) }
+function setStatus(msg,color='#7af'){ $('status').textContent=msg; $('status').style.color=color; }
+
+function getSelectedStyles(){
+  return Array.from(document.querySelectorAll('.style-tag.active'))
+    .map(t=>t.dataset.style).join(', ');
+}
+
+function updateStyleHint(){
+  const s=getSelectedStyles();
+  $('style-hint').textContent = s ? '已選：'+s : '（未選擇）';
+}
+
+function showPreviewSVG(svgCode){
+  const p=$('preview'); p.innerHTML=svgCode;
+  const s=p.querySelector('svg');
+  if(s){s.style.width='100%';s.style.height='100%';s.removeAttribute('width');s.removeAttribute('height');}
+}
+
+function dlSVG(){
+  if(!currentSVG)return;
+  const b64=btoa(unescape(encodeURIComponent(currentSVG)));
+  const a=document.createElement('a');
+  a.href='data:image/svg+xml;base64,'+b64;
+  a.download='icon.svg';a.click();
+}
+
+function dlPNG(size,name){
+  if(!currentSVG)return;
+  const canvas=$('canvas');
+  canvas.width=size;canvas.height=size;
+  const ctx=canvas.getContext('2d');
+  const b64=btoa(unescape(encodeURIComponent(currentSVG)));
+  const img=new Image();
+  img.onload=()=>{
+    ctx.clearRect(0,0,size,size);
+    ctx.drawImage(img,0,0,size,size);
+    const a=document.createElement('a');
+    a.href=canvas.toDataURL('image/png');
+    a.download=name;a.click();
+  };
+  img.src='data:image/svg+xml;base64,'+b64;
+}
+
+async function generate(){
+  const desc=$('desc').value.trim();
+  if(!desc){setStatus('請輸入或選擇 Icon 描述！','#ffa');return;}
+  const style=getSelectedStyles()||'app icon style';
+
+  currentSVG=null;
+  $('dl-row').style.display='none';
+  $('retry-btn').style.display='none';
+  $('gen-btn').disabled=true;
+  $('preview').innerHTML='<div class="hint">✨ AI 生成中...<br><small style="color:#445">約需 10–20 秒</small></div>';
+  setStatus('呼叫 AI 中，請稍候...');
+
+  try{
+    const res=await fetch(WORKER_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-5',
+        max_tokens:2048,
+        system:'You are an expert SVG icon designer. Output ONLY raw SVG code, no markdown fences, no explanation, nothing else.',
+        messages:[{
+          role:'user',
+          content:`Design a square app icon for: ${desc}
+Style: ${style}
+Requirements:
+- viewBox="0 0 512 512"
+- Fully self-contained, no external resources
+- Bold and visually striking at small sizes
+- Use gradients and visual depth
+Output ONLY the <svg viewBox="0 0 512 512">...</svg> element.`
+        }]
+      })
+    });
+
+    const data=await res.json();
+    if(data.error)throw new Error(data.error.message||JSON.stringify(data.error));
+    if(!data.content||!data.content[0])throw new Error('回應格式錯誤');
+
+    const text=data.content.map(b=>b.text||'').join('');
+    const match=text.match(/<svg[\s\S]*?<\/svg>/i);
+    if(!match)throw new Error('找不到 SVG，回應：'+text.slice(0,80));
+
+    currentSVG=match[0];
+    showPreviewSVG(currentSVG);
+    $('dl-row').style.display='flex';
+    $('retry-btn').style.display='block';
+    setStatus('✅ 生成完成！可下載 SVG 或 PNG','#90ffc0');
+
+  }catch(e){
+    setStatus('❌ '+e.message,'#f88');
+    $('preview').innerHTML='<div class="hint" style="color:#f66">生成失敗<br><small>'+e.message+'</small></div>';
+    $('retry-btn').style.display='block';
+  }finally{
+    $('gen-btn').disabled=false;
+  }
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+
+  // 描述快選（單選，填入 textarea）
+  document.querySelectorAll('.desc-tag').forEach(tag=>{
+    tag.addEventListener('pointerup',()=>{
+      document.querySelectorAll('.desc-tag').forEach(t=>t.classList.remove('active'));
+      tag.classList.add('active');
+      $('desc').value = tag.dataset.desc;
+      $('desc-hint').textContent = '已選：'+tag.textContent.trim()+'，可在下方修改';
+    });
+  });
+
+  // 風格多選
+  document.querySelectorAll('.style-tag').forEach(tag=>{
+    tag.addEventListener('pointerup',()=>{
+      tag.classList.toggle('active');
+      updateStyleHint();
+    });
+  });
+
+  updateStyleHint();
+
+  $('gen-btn').addEventListener('pointerup',generate);
+  $('retry-btn').addEventListener('pointerup',generate);
+  $('dl-svg').addEventListener('pointerup',dlSVG);
+  $('dl-192').addEventListener('pointerup',()=>dlPNG(192,'icon-192.png'));
+  $('dl-512').addEventListener('pointerup',()=>dlPNG(512,'icon-512.png'));
+});
+</script>
+
+
+</body></html>

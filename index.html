@@ -196,7 +196,7 @@ async function generate(){
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({
         model:'claude-sonnet-4-5',
-        max_tokens:2048,
+        max_tokens:4096,
         system:'You are an expert SVG icon designer. Output ONLY raw SVG code, no markdown fences, no explanation, nothing else.',
         messages:[{
           role:'user',
@@ -207,7 +207,7 @@ Requirements:
 - Fully self-contained, no external resources
 - Bold and visually striking at small sizes
 - Use gradients and visual depth
-Output ONLY the <svg viewBox="0 0 512 512">...</svg> element.`
+Output ONLY the <svg viewBox="0 0 512 512">...</svg> element. Keep SVG concise, under 150 lines.`
         }]
       })
     });

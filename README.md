@@ -1,44 +1,18 @@
-# icon-ai
+# 🎨 Icon 產生器（AI）
 
-> 一個 Progressive Web App
+輸入描述、選擇風格，由 AI 生成 SVG 圖示，並轉成 App 常用的 PNG 尺寸。
 
-## 📦 包含檔案
+**線上使用**：https://kftseng2oo1.github.io/icon-ai/
 
-- `icon-192.png`
-- `icon-512.png`
-- `manifest.json`
-- `sw.js`
-- `index.html`
-- `icon.svg`
-- `icon-maskable.svg`
-- `offline.html`
+## 主要功能
+- 文字描述或從選項挑選主題，可多選風格
+- AI 直接產生 SVG（約 10–20 秒），失敗可重試
+- 下載 SVG、PNG 192、PNG 512
 
-## 🚀 部署到 GitHub Pages
+## 技術與依賴
+- 單檔 HTML PWA（`index.html` 內含全部 HTML/CSS/JS），`manifest.json` + `sw.js` 提供安裝到主畫面與離線快取。
+- AI 經 `arcar.kftseng2oo1.workers.dev` 代理
+- Canvas 把 SVG 轉成 PNG
 
-```bash
-git init
-git add .
-git commit -m "init: icon-ai PWA"
-git branch -M main
-git remote add origin https://github.com/<username>/<repo>.git
-git push -u origin main
-```
-
-然後在 GitHub repo → **Settings → Pages** → Source 選 `main` 分支，等待幾分鐘後即可訪問。
-
-## 📱 安裝 PWA
-
-在支援的瀏覽器（Chrome / Edge / Safari iOS）中打開網頁，  
-點擊「**安裝**」或「**加入主畫面**」即可將此 App 安裝到裝置。
-
-## ⚙ 技術規格
-
-| 項目 | 值 |
-|------|-----|
-| display | standalone |
-| theme_color | #1a73e8 |
-| lang | zh-TW |
-| scope | /icon-ai/ |
-
----
-*由 [PWA 打包神器](https://github.com) 自動生成*
+## 相關 repo
+- [icon](https://github.com/kftseng2oo1/icon)：幾何形狀圖示產生器（不需 AI）
